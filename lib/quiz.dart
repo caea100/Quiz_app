@@ -10,7 +10,7 @@ class Quiz extends StatefulWidget {
 
 class _QuizState extends State<Quiz> {
   List<Map<String, dynamic>> quiz = [
-  {
+    {
       "pergunta": "Qual o objetivo do Mercantilismo?",
       "respostas": [
         "Fortalecer o Estado e enriquecer a sociedade.",
@@ -55,7 +55,8 @@ class _QuizState extends State<Quiz> {
       "alternativa_correta": 0,
     },
     {
-      "pergunta": "Qual foi o evento que marcou o início da Segunda Guerra Mundial?",
+      "pergunta":
+          "Qual foi o evento que marcou o início da Segunda Guerra Mundial?",
       "respostas": [
         "Ataque a Pearl Harbor",
         "Bombardeio de Hiroshima",
@@ -64,7 +65,8 @@ class _QuizState extends State<Quiz> {
         "Declaração de Guerra da Alemanha",
       ],
       "alternativa_correta": 2,
-    },  {
+    },
+    {
       "pergunta": "Qual foi o primeiro imperador do Império Romano?",
       "respostas": [
         "Augusto",
@@ -87,7 +89,8 @@ class _QuizState extends State<Quiz> {
       "alternativa_correta": 1,
     },
     {
-      "pergunta": "Quem foi o líder do movimento pelos direitos civis nos Estados Unidos?",
+      "pergunta":
+          "Quem foi o líder do movimento pelos direitos civis nos Estados Unidos?",
       "respostas": [
         "Martin Luther King Jr.",
         "Malcolm X",
@@ -128,52 +131,54 @@ class _QuizState extends State<Quiz> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: Text('Quiz'),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Center(
+            child: Text('Quiz'),
+          ),
         ),
-      ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: perguntaNumero >= quiz.length
-              ? Text('Quiz concluído!')
-              : Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text(
-                      'Pergunta ${perguntaNumero + 1} de ${quiz.length}',
-                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      'Pergunta: ${quiz[perguntaNumero]['pergunta']}',
-                      style: TextStyle(fontSize: 25),
-                    ),
-                    ...List.generate(
-                      quiz[perguntaNumero]['respostas'].length,
-                      (index) => Container(
-                        width: double.maxFinite,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            verificarResposta(index);
-                          },
-                          child: Text(
-                            quiz[perguntaNumero]['respostas'][index],
-                            style: TextStyle(fontSize: 30),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.fromLTRB(50, 20, 50, 20),
+        body: SingleChildScrollView(
+          child: Center(
+            child: perguntaNumero >= quiz.length
+                ? Text('Quiz concluído!')
+                : Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        'Pergunta ${perguntaNumero + 1} de ${quiz.length}',
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        'Pergunta: ${quiz[perguntaNumero]['pergunta']}',
+                        style: TextStyle(fontSize: 25),
+                      ),
+                      ...List.generate(
+                        quiz[perguntaNumero]['respostas'].length,
+                        (index) => Container(
+                          width: double.maxFinite,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 10),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              verificarResposta(index);
+                            },
+                            child: Text(
+                              quiz[perguntaNumero]['respostas'][index],
+                              style: TextStyle(fontSize: 30),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.fromLTRB(50, 20, 50, 20),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
+                    ],
+                  ),
+          ),
         ),
       ),
-    ),);
+    );
   }
 
   void verificarResposta(int index) {

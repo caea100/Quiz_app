@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class Resultado extends StatelessWidget {
@@ -32,7 +31,7 @@ class Resultado extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                 Navigator.pushNamed(context, '/');
+                  Navigator.pushNamed(context, '/');
                 },
                 child: Text(
                   'Tente de novo',
