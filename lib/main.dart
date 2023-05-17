@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_app/quiz.dart';
-import 'package:quiz_app/resultado.dart';
-
-import 'home.dart';
+import 'package:quiz_app/screens/geografia.dart';
+import 'package:quiz_app/screens/quiz.dart';
+import 'package:quiz_app/screens/resultado.dart';
+import 'package:quiz_app/widgets/topico.dart';
+import 'widgets/home.dart';
 
 void main() {
-  //runApp(const Resultado(acertos: 5));
   runApp(MyApp());
 }
 
@@ -18,9 +18,11 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => Home(),
+        '/Topico': (context) => Topico(),
+        '/Geografia': (context) => Geografia(),
         '/Quiz': (context) => Quiz(),
-        '//Resultado': (context) => Resultado(
-              acertos: 5,
+        '/Resultado': (context) => Resultado(
+              acertos: 0,
             ),
       },
     );
