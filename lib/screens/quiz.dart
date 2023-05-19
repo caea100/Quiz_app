@@ -1,15 +1,18 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:quiz_app/screens/resultado.dart';
 
-class Quiz extends StatefulWidget {
-  const Quiz({Key? key}) : super(key: key);
+class Historia extends StatefulWidget {
+  const Historia({Key? key}) : super(key: key);
 
   @override
-  _QuizState createState() => _QuizState();
+  _HistoriaState createState() => _HistoriaState();
 }
 
-class _QuizState extends State<Quiz> {
+class _HistoriaState extends State<Historia> {
   List<Map<String, dynamic>> quiz = [
+    
     {
       "pergunta": "Qual o objetivo do Mercantilismo?",
       "respostas": [
@@ -130,6 +133,10 @@ class _QuizState extends State<Quiz> {
 
   @override
   Widget build(BuildContext context) {
+    quiz.shuffle(Random());
+    quiz[perguntaNumero]['respostas'].shuffle(Random());
+
+    
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -155,7 +162,7 @@ class _QuizState extends State<Quiz> {
                       ),
                       ...List.generate(
                         quiz[perguntaNumero]['respostas'].length,
-                        (index) => Container(
+                        (index) => Container(     
                           width: double.maxFinite,
                           padding: EdgeInsets.symmetric(
                               horizontal: 10, vertical: 10),

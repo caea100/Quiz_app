@@ -1,5 +1,24 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:quiz_app/screens/resultado.dart';
+
+void main() {
+  runApp(QuizApp());
+}
+
+class QuizApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Quiz App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: Geografia(),
+    );
+  }
+}
 
 class Geografia extends StatefulWidget {
   const Geografia({Key? key}) : super(key: key);
@@ -23,105 +42,16 @@ class _GeografiaState extends State<Geografia> {
       "alternativa_correta": 4,
     },
     {
-      "pergunta": "Quem foi o primeiro presidente do Brasil?",
+      "pergunta": "Eu aqui",
+      "imagem": "assets/images/brasil.png",
       "respostas": [
-        "Getúlio Vargas",
-        "Juscelino Kubitschek",
-        "Deodoro da Fonseca",
-        "Fernando Henrique Cardoso",
-        "Tancredo Neves",
-      ],
-      "alternativa_correta": 2,
-    },
-    {
-      "pergunta": "Qual foi o período conhecido como Renascimento Cultural?",
-      "respostas": [
-        "Século XIX",
-        "Século XVI",
-        "Século XVIII",
-        "Século XIV",
-        "Século XV",
+        "Fortalecer o Estado e enriquecer a sociedade.",
+        "Auxiliar no desenvolvimento da sociedade proletária.",
+        "Fortalecer a sociedade proletária em ascensão.",
+        "Diminuir a cobrança de impostos favorecendo a sociedade.",
+        "Fortalecer o Estado e enriquecer a burguesia.",
       ],
       "alternativa_correta": 4,
-    },
-    {
-      "pergunta": "Quem foi o líder da Revolução Russa de 1917?",
-      "respostas": [
-        "Vladimir Lenin",
-        "Josef Stalin",
-        "Nikita Khrushchev",
-        "Mikhail Gorbachev",
-        "Boris Yeltsin",
-      ],
-      "alternativa_correta": 0,
-    },
-    {
-      "pergunta":
-          "Qual foi o evento que marcou o início da Segunda Guerra Mundial?",
-      "respostas": [
-        "Ataque a Pearl Harbor",
-        "Bombardeio de Hiroshima",
-        "Invasão da Polônia",
-        "Batalha de Stalingrado",
-        "Declaração de Guerra da Alemanha",
-      ],
-      "alternativa_correta": 2,
-    },
-    {
-      "pergunta": "Qual foi o primeiro imperador do Império Romano?",
-      "respostas": [
-        "Augusto",
-        "Nero",
-        "Trajano",
-        "César",
-        "Tibério",
-      ],
-      "alternativa_correta": 0,
-    },
-    {
-      "pergunta": "Qual foi o último faraó do Antigo Egito?",
-      "respostas": [
-        "Ramsés II",
-        "Cleópatra",
-        "Tutancâmon",
-        "Akhenaton",
-        "Ptolomeu XIII",
-      ],
-      "alternativa_correta": 1,
-    },
-    {
-      "pergunta":
-          "Quem foi o líder do movimento pelos direitos civis nos Estados Unidos?",
-      "respostas": [
-        "Martin Luther King Jr.",
-        "Malcolm X",
-        "Rosa Parks",
-        "Harriet Tubman",
-        "Barack Obama",
-      ],
-      "alternativa_correta": 0,
-    },
-    {
-      "pergunta": "Qual foi o primeiro país a abolir a escravidão?",
-      "respostas": [
-        "Reino Unido",
-        "Estados Unidos",
-        "França",
-        "Brasil",
-        "Haiti",
-      ],
-      "alternativa_correta": 4,
-    },
-    {
-      "pergunta": "Quem foi o líder da Revolução Cubana em 1959?",
-      "respostas": [
-        "Che Guevara",
-        "Fidel Castro",
-        "Hugo Chávez",
-        "Augusto Sandino",
-        "José Martí",
-      ],
-      "alternativa_correta": 1,
     },
   ];
 
@@ -131,57 +61,55 @@ class _GeografiaState extends State<Geografia> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Center(
-            child: Text('Quiz'),
-          ),
-        ),
-        body: SingleChildScrollView(
-          child: Center(
-            child: perguntaNumero >= quiz.length
-                ? Text('Quiz concluído!')
-                : Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(
-                        'Pergunta ${perguntaNumero + 1} de ${quiz.length}',
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        'Pergunta: ${quiz[perguntaNumero]['pergunta']}',
-                        style: TextStyle(fontSize: 25),
-                      ),
-                      Image.asset(
-                        quiz[perguntaNumero]['imagem'] ?? '',
-                        width: 200,
-                        height: 200,
-                      ),
-                      ...List.generate(
-                        quiz[perguntaNumero]['respostas'].length,
-                        (index) => Container(
-                          width: double.maxFinite,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 10),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              verificarResposta(index);
-                            },
-                            child: Text(
-                              quiz[perguntaNumero]['respostas'][index],
-                              style: TextStyle(fontSize: 30),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              padding: EdgeInsets.fromLTRB(50, 20, 50, 20),
-                            ),
+    quiz.shuffle(Random());
+    quiz[perguntaNumero]['respostas'].shuffle(Random());
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Quiz'),
+      ),
+      body: SingleChildScrollView(
+        child: Center(
+          child: perguntaNumero >= quiz.length
+              ? Text('Quiz concluído!')
+              : Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      'Pergunta ${perguntaNumero + 1} de ${quiz.length}',
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      'Pergunta: ${quiz[perguntaNumero]['pergunta']}',
+                      style: TextStyle(fontSize: 25),
+                    ),
+                    Image.asset(
+                      quiz[perguntaNumero]['imagem'] ?? '',
+                      width: 200,
+                      height: 200,
+                    ),
+                    ...List.generate(
+                      quiz[perguntaNumero]['respostas'].length,
+                      (index) => Container(
+                        width: double.maxFinite,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            verificarResposta(index);
+                          },
+                          child: Text(
+                            quiz[perguntaNumero]['respostas'][index],
+                            style: TextStyle(fontSize: 30),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.fromLTRB(50, 20, 50, 20),
                           ),
                         ),
                       ),
-                    ],
-                  ),
-          ),
+                    ),
+                  ],
+                ),
         ),
       ),
     );

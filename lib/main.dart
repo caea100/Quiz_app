@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => Home(),
         '/Topico': (context) => Topico(),
         '/Geografia': (context) => Geografia(),
-        '/Quiz': (context) => Quiz(),
+        '/Quiz': (context) => Historia(),
         '/Resultado': (context) => Resultado(
               acertos: 0,
             ),
